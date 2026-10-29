@@ -1,3 +1,9 @@
 .DS_Store
 rps-results-*.csv
 rps-results-*.json
+
+*.pem
+*.uey
+*.backup
+rps-researcher-private/
+unlocked-rps-results.*
