@@ -8,3 +8,6 @@ The passkey is configured in CONFIG.researcherPassphrase (currently fanouicae). 
 Downloads are plain CSV, not encrypted. Previous private key/tool files are kept separately in case older encrypted downloads need recovery; do not distribute them.
 
 Records remain in this browser localStorage. CSV exports contain only the current participant. Google Form responses are separate. Session totals repeat per round row: aggregate by session_id to avoid double-counting.
+
+## Redo a test
+After entering the results passkey, Redo test appears beside the CSV download. Download first if the current run should be kept. Confirming clears only the current participant session and form draft and returns to the start; other saved sessions, downloaded files, and submitted Google Forms are unchanged. Downloads lock again.

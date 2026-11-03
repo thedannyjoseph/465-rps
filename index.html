@@ -1,23 +1,61 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project Optimus Prime · Rock Paper Scissors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{font-family:"Avenir Next","Avenir","Segoe UI",sans-serif;color:#172d32;background:#f4f6f1}*{box-sizing:border-box}body{margin:0;padding:32px 20px}main{max-width:780px;margin:auto}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}.tag{font-family:system-ui,sans-serif;font-size:12px;letter-spacing:2px;font-weight:750;color:#427366}h1{font-size:clamp(32px,6vw,48px);letter-spacing:-2px;margin:12px 0}p{line-height:1.6;color:#586a69}.card{background:white;border:1px solid #dce4df;border-radius:24px;padding:28px;box-shadow:0 14px 40px #203b3010}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}#progress{display:flex;gap:6px;margin:20px 0}.dot{height:7px;flex:1;background:#e8eee9;border-radius:8px}.dot.done{background:#26836a}.arena{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;margin:26px 0}.symbol{font-size:64px;min-height:86px}.label{font-size:12px;color:#647975;letter-spacing:1px}.vs{color:#94a39b}#message{text-align:center;min-height:54px;font-size:20px;font-weight:650}button{font:inherit;cursor:pointer;border:1px solid #cfdbd3;border-radius:14px;background:white;color:#172d32;padding:13px 18px;font-weight:650}button:hover{background:#edf5ef}button:focus-visible,input:focus-visible{outline:3px solid #c28d2d;outline-offset:3px}button:disabled{opacity:.45;cursor:default}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.choices button{font-size:18px;padding:22px 8px}.scores{display:flex;justify-content:center;gap:30px;margin:24px 0 0;text-align:center}.scores strong{display:block;font-size:26px}.scores span{font-size:13px;color:#647975}.primary{background:#176b55;color:white;border-color:#176b55}.primary:hover{background:#10533f}input,select{font:inherit;border:1px solid #cfdbd3;border-radius:12px;padding:12px;width:100%;margin:8px 0 16px}label{font-weight:600;font-size:14px}#start button{width:100%}details{margin:28px 0}summary{cursor:pointer;font-size:14px;color:#526962}details .card{margin-top:14px;padding:20px}.small{font-size:13px}#history{padding:0;list-style:none;font-size:14px}#history li{padding:10px 0;border-bottom:1px solid #edf0eb;display:flex;justify-content:space-between;gap:10px}#next{display:block;margin:20px auto 0}#storage{font-size:13px;color:#536a61}footer{text-align:center;font-size:12px;color:#697b75;margin:24px} [hidden]{display:none!important}@media(max-width:480px){body{padding:22px 12px}.card{padding:20px}.choices{gap:6px}.choices button{font-size:15px}.scores{gap:24px}.symbol{font-size:52px}}
-h1,h2{font-weight:700;line-height:1.15}h1{letter-spacing:-1.5px}h2{letter-spacing:-.6px}label,button{font-weight:600}input,select{line-height:1.5}header{flex-wrap:wrap;gap:12px}body{line-height:1.5}
+:root {
+ --bg:#f8f8f7;--surface:#fff;--ink:#171918;--muted:#555b58;--accent:#202724;--accent-hover:#39443e;--border:#b8bfba;--track:#e3e7e4;
+ --font-heading:'Barlow Condensed','Arial Narrow',sans-serif;--font-body:'Plus Jakarta Sans','Arial',sans-serif;
+ --text-sm:.875rem;--text-base:1rem;--text-lg:1.25rem;--text-xl:clamp(1.6rem,3vw,2rem);--text-display:clamp(4rem,7vw,6.25rem);
+ --s1:.375rem;--s2:.75rem;--s3:1rem;--s4:1.5rem;--s5:2rem;--s6:3rem;--s7:4.5rem;
+ --radius-sm:4px;--radius-lg:8px;--line:1px;--focus:3px;--control:48px;--width:1120px;--motion:150ms;
+ font-family:var(--font-body);font-size:16px;color:var(--ink);background:var(--bg);
+}
+*{box-sizing:border-box}body{margin:0;padding:var(--s6) var(--s4);line-height:1.65}main{max-width:var(--width);margin:auto;display:grid;grid-template-columns:minmax(220px,.85fr) minmax(0,1.4fr);column-gap:var(--s7);align-items:start}header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;border-bottom:var(--line) solid var(--border);padding-bottom:var(--s4);margin-bottom:var(--s7)}.tag{font-family:var(--font-heading);font-size:var(--text-sm);font-weight:700;letter-spacing:.08em;color:var(--accent)}h1,h2{font-family:var(--font-heading);line-height:1.12;font-weight:700;text-wrap:balance}h1{grid-column:1;grid-row:2;font-size:var(--text-display);letter-spacing:-.025em;margin:0 0 var(--s4)}main>.intro{grid-column:1;grid-row:3;font-size:var(--text-lg);margin:var(--s4) 0;max-width:26ch}p{color:var(--muted);margin:var(--s3) 0 var(--s4);text-wrap:pretty}h2{font-size:var(--text-xl);margin:0 0 var(--s4)}.card{grid-column:2;grid-row:2/span 4;min-width:0;border:var(--line) solid var(--border);border-radius:var(--radius-lg);padding:var(--s5);background:var(--surface)}#stepTwo{grid-row:auto;margin-top:var(--s4)}.small{font-size:var(--text-sm)}label{display:block;font-size:var(--text-sm);font-weight:600;color:var(--ink)}input,select{font:inherit;color:var(--ink);width:100%;min-height:var(--control);border:var(--line) solid var(--border);border-radius:var(--radius-sm);padding:var(--s2) var(--s3);margin:var(--s1) 0 var(--s4);background:var(--surface);transition:border-color var(--motion)}input::placeholder{color:var(--muted)}input:hover,select:hover{border-color:var(--ink)}button{font:inherit;font-weight:600;min-height:var(--control);cursor:pointer;border:var(--line) solid var(--border);border-radius:var(--radius-sm);padding:var(--s2) var(--s4);background:var(--surface);color:var(--ink);transition:background-color var(--motion),border-color var(--motion),transform var(--motion)}button:hover{border-color:var(--accent);background:var(--bg)}button:active{transform:translateY(1px)}button:disabled{cursor:default;color:var(--muted);background:var(--bg);transform:none}.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}:is(button,input,select,a):focus-visible{outline:var(--focus) solid var(--accent);outline-offset:var(--focus)}#start>button{width:100%;margin-top:var(--s2)}.top{display:flex;justify-content:space-between;gap:var(--s3);align-items:center}#progress{display:flex;gap:var(--s1);margin:var(--s4) 0}.dot{height:var(--s1);flex:1;background:var(--track);border-radius:var(--radius-sm)}.dot.done{background:var(--accent)}.arena{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;text-align:center;padding:var(--s6) 0;border-block:var(--line) solid var(--border);margin:var(--s5) 0}.symbol{font-size:var(--text-display);min-height:1.5em}.label{font-size:var(--text-sm);font-weight:600;letter-spacing:.06em}.vs{font-size:var(--text-sm);color:var(--muted)}#message{text-align:center;font-weight:600;font-size:var(--text-lg);min-height:3em}.choices{display:flex;gap:var(--s2)}.choices button{flex:1;padding:var(--s3) var(--s1)}#next{display:block;margin:var(--s5) auto 0}#storage{grid-column:2;font-size:var(--text-sm);margin-top:var(--s3)}footer{grid-column:1/-1;margin-top:var(--s7);padding-top:var(--s4);border-top:var(--line) solid var(--border);font-size:var(--text-sm);color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:760px){body{padding:var(--s4) var(--s3)}main{display:block}header{margin-bottom:var(--s6)}h1{max-width:14ch}main>.intro{max-width:none;margin-bottom:var(--s5)}.card{padding:var(--s4)}.choices{gap:var(--s1)}.top{align-items:start;flex-wrap:wrap}footer{margin-top:var(--s6)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* A quiet editorial surface, with the form as the primary task. */
+body{padding-top:var(--s5)}
+header{margin-bottom:var(--s7);padding-bottom:var(--s5)}
+.tag{font-weight:600;letter-spacing:.16em;font-size:1.05rem;color:var(--ink)}
+header .small{font-size:.8rem;letter-spacing:.02em}
+h1{font-weight:300;line-height:1.02;letter-spacing:-.015em;max-width:7ch;position:sticky;top:var(--s6);margin-top:var(--s2)}
+h2{font-weight:400;letter-spacing:0;font-size:2.25rem}
+.card{background:transparent;border:0;border-radius:0;padding:var(--s2) 0 var(--s4)}
+#start>p.small{max-width:48ch;margin-bottom:var(--s5)}
+input,select{background:var(--surface);border-radius:var(--radius-sm);min-height:50px;padding-inline:var(--s3);margin-bottom:var(--s4);font-size:.9375rem}
+label{font-size:.8125rem;font-weight:500;margin-bottom:var(--s1)}
+button{font-size:.875rem;border-radius:var(--radius-sm);padding-inline:var(--s4)}
+.primary{font-weight:500}
+#start>button{width:auto;min-width:190px;margin-top:var(--s3)}
+#start>p:last-of-type{font-size:var(--text-sm);padding-block:var(--s3);border-top:var(--line) solid var(--track);margin-bottom:0}
+.arena{background:var(--surface);border:var(--line) solid var(--track);border-radius:var(--radius-lg)}
+.top>strong{font-family:var(--font-heading);font-size:1.75rem;font-weight:400}
+.symbol{font-size:3.5rem}
+.choices button{background:var(--surface);min-height:64px}
+#message{font-weight:500;font-size:var(--text-base);min-height:var(--s6)}
+#stepTwo{padding-top:var(--s5);border-top:var(--line) solid var(--border)}
+#storage{font-size:.75rem}
+#storage:empty{display:none}
+@media(max-width:760px){header{margin-bottom:var(--s6)}h1{position:static;max-width:none;font-size:clamp(3rem,10vw,4.5rem);margin-bottom:var(--s6)}.card{padding:0 0 var(--s4)}h2{font-size:2rem}#start>button{width:100%}.tag{font-size:.9rem;letter-spacing:.12em}}
+.result-actions{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
 </style>
 <main>
 <header><span class="tag">PROJECT OPTIMUS PRIME</span><span class="small">Participant study</span></header>
-<h1>Rock. Paper. Scissors.</h1>
-<p>Play against an independently random robot.</p>
+<h1>Rock Paper Scissors</h1>
+
 <form class="card" id="start">
 <h2>Before you play</h2>
-<p class="small">Your details and game results are saved in this browser for the study. Researcher downloads contain this information.</p>
+<p class="small">Your details and game results are saved in this browser for the study. Your results file includes these details.</p>
 <label for="email">Participant ID · U-M email</label><input id="email" type="email" required maxlength="254" pattern="[^@\s]+@umich\.edu" placeholder="uniqname@umich.edu" autocomplete="email">
 <label for="first">First name</label><input id="first" required maxlength="80" autocomplete="given-name">
 <label for="last">Last name</label><input id="last" required maxlength="80" autocomplete="family-name">
 <label for="year">Year in school</label><select id="year" required><option value="">Select year</option><option>Freshman</option><option>Sophomore</option><option>Junior</option><option>Senior</option><option>Master’s</option><option>PhD</option></select>
 <label for="experience">Rock-paper-scissors experience</label><select id="experience" required><option value="">Select experience</option><option>Never played</option><option>Played a few times</option><option>Play occasionally</option><option>Play frequently</option></select>
 <label for="treatment">Treatment assigned by your researcher</label><select id="treatment" required><option value="">Select the treatment you were assigned</option><option value="A">A · 8 rounds</option><option value="B">B · 16 rounds</option><option value="C">C · 32 rounds</option></select>
-<p>Ties count as rounds. Rock beats scissors, scissors beats paper, and paper beats rock.</p>
+<p>Rock beats scissors, scissors beats paper, and paper beats rock.</p>
 <button class="primary">Start playing →</button>
 </form>
 <form class="card" id="prediction" hidden><h2>Predict your own score</h2><p id="predictPrompt"></p><label for="predicted">How many rounds do you think you won?</label><input id="predicted" type="number" min="0" step="1" required><button class="primary">Save my score →</button></form>
@@ -30,8 +68,8 @@ h1,h2{font-weight:700;line-height:1.15}h1{letter-spacing:-1.5px}h2{letter-spacin
 </section>
 <section class="card" id="finish" hidden><h2>All rounds complete.</h2><p id="finishMessage">Before you finish, estimate how many rounds you won.</p><button id="predictScore" class="primary">Predict my own score →</button></section>
 <p id="storage" role="status"></p>
-<section class="card" id="stepTwo" hidden><h2>Step 2 · Submit the form, then download</h2><p>Complete and submit the score form in the other tab. Then ask the researcher for the results passkey.</p><form id="unlock"><label for="passphrase">Results passkey</label><input id="passphrase" type="password" required autocomplete="off"><button class="primary">Unlock my results →</button><p id="unlockStatus" role="status"></p></form><div id="exports" hidden><p>Your results are ready. Download the file and give it to the researcher.</p><button id="csv" class="primary">Download my results (CSV)</button><p id="sendStatus" role="status"></p></div></section>
-<footer>Independent random choices · Results saved on this computer</footer>
+<section class="card" id="stepTwo" hidden><h2>Step 2 · Submit the form, then download</h2><p>Complete and submit the score form in the other tab. Then ask the researcher for the results passkey.</p><form id="unlock"><label for="passphrase">Results passkey</label><input id="passphrase" type="password" required autocomplete="off"><button class="primary">Unlock my results →</button><p id="unlockStatus" role="status"></p></form><div id="exports" hidden><p>Your results are ready. Download the file and give it to the researcher.</p><div class="result-actions"><button id="csv" class="primary">Download my results (CSV)</button><button id="redo" type="button">Redo test ↺</button></div><p id="sendStatus" role="status"></p></div></section>
+
 </main>
 <script>
 'use strict';
@@ -42,7 +80,9 @@ const KEY='ioe465-rps-study-v2',moves=['rock','paper','scissors'],icons={rock:'�
 const $=id=>document.getElementById(id);
 let records=[],match=null,waiting=false,storageOK=true,unlocked=false;
 try{const raw=localStorage.getItem(KEY);if(raw){records=JSON.parse(raw);if(!Array.isArray(records))throw Error();}}catch(e){storageOK=false;}
-function save(){if(storageOK){try{localStorage.setItem(KEY,JSON.stringify(records));}catch(e){storageOK=false;}}$('storage').textContent=storageOK?'Your progress is saved in this browser.':'Local saving unavailable. Keep this page open until you download your results.';}
+const SESSION_KEY=KEY+'-active',DRAFT_KEY=KEY+'-draft';
+function checkpoint(){if(!match)return;try{sessionStorage.setItem(SESSION_KEY,JSON.stringify({id:match.id,waiting,stage:!$('stepTwo').hidden?'form':!$('finish').hidden?'finish':'game'}));}catch(e){$('storage').textContent='Refresh recovery unavailable. Keep this tab open until you finish.';}}
+function save(){if(storageOK){try{localStorage.setItem(KEY,JSON.stringify(records));}catch(e){storageOK=false;}}$('storage').textContent=storageOK?'Your progress is saved in this browser.':'Local saving unavailable. Keep this page open until you download your results.';checkpoint();}
 function randomIndex(){const n=new Uint32Array(1);do{crypto.getRandomValues(n);}while(n[0]>=4294967295);return n[0]%3;}
 function randomMove(){return moves[randomIndex()];}
 function outcome(a,b){return a===b?'tie':beats[a]===b?'win':'loss';}
@@ -51,19 +91,64 @@ $('start').onsubmit=e=>{e.preventDefault();if(!$('start').reportValidity())retur
 match={id:crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+crypto.getRandomValues(new Uint32Array(1))[0],participantId:$('email').value.trim().toLowerCase(),firstName:$('first').value.trim(),lastName:$('last').value.trim(),year:$('year').value,experience:$('experience').value,treatment,totalRounds:lengths[treatment],predictedWins:null,startedAt:new Date().toISOString(),completedAt:null,rounds:[]};
 if(!match.firstName||!match.lastName)return;
 records.push(match);waiting=false;$('start').hidden=true;$('game').hidden=false;$('human').textContent='❔';$('robot').textContent='🤖';$('message').textContent='Choose your move.';save();render();};
-$('predictScore').onclick=()=>{window.open('https://docs.google.com/forms/d/e/1FAIpQLSczVBw1UN3ec9uCSiTnIKQmIVoXGBjXCEidHVZ5ELEAZvMRlw/viewform?usp=dialog','_blank','noopener,noreferrer');$('finishMessage').textContent='Step 1 · Submit the score form in the new tab. Then continue to Step 2 below.';$('stepTwo').hidden=false;};
+$('predictScore').onclick=()=>{window.open('https://docs.google.com/forms/d/e/1FAIpQLSczVBw1UN3ec9uCSiTnIKQmIVoXGBjXCEidHVZ5ELEAZvMRlw/viewform?usp=dialog','_blank','noopener,noreferrer');$('finishMessage').textContent='Step 1 · Submit the score form in the new tab. Then continue to Step 2 below.';$('stepTwo').hidden=false;save();};
 $('prediction').onsubmit=e=>{e.preventDefault();if(!$('prediction').reportValidity())return;const n=Number($('predicted').value);if(!Number.isInteger(n)||n<0||n>match.totalRounds)return;match.predictedWins=n;match.scoreReportedAt=new Date().toISOString();$('prediction').hidden=true;$('finish').hidden=false;$('finishMessage').textContent='Thank you. Your response is saved. Please let the researcher know.';$('predictScore').hidden=true;save();};
 function render(){const n=match.rounds.length;$('round').textContent='Round '+Math.min(n+(waiting?0:1),match.totalRounds)+' of '+match.totalRounds;$('treatmentLabel').textContent='Treatment '+match.treatment;$('progress').replaceChildren(...Array.from({length:match.totalRounds},(_,i)=>{const d=document.createElement('span');d.className='dot'+(i<n?' done':'');return d;}));document.querySelectorAll('[data-move]').forEach(b=>b.disabled=waiting||n>=match.totalRounds);$('next').hidden=!waiting;$('next').textContent=n===match.totalRounds?'Finish session →':'Next round →';}
 // Show choices without reporting wins, losses, ties, or cumulative scores.
 document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{if(!match||waiting||match.rounds.length>=match.totalRounds)return;const player=b.dataset.move,robot=randomMove();match.rounds.push({round:match.rounds.length+1,player,robot,result:outcome(player,robot),playedAt:new Date().toISOString()});if(match.rounds.length===match.totalRounds)match.completedAt=new Date().toISOString();waiting=true;$('human').textContent=icons[player];$('robot').textContent=icons[robot];$('message').textContent='Choices revealed.';save();render();});
-$('next').onclick=()=>{if(match.rounds.length===match.totalRounds){$('game').hidden=true;$('finish').hidden=false;}else{waiting=false;$('human').textContent='❔';$('robot').textContent='🤖';$('message').textContent='Choose your move.';render();}};
+$('next').onclick=()=>{if(match.rounds.length===match.totalRounds){$('game').hidden=true;$('finish').hidden=false;}else{waiting=false;$('human').textContent='❔';$('robot').textContent='🤖';$('message').textContent='Choose your move.';render();}save();};
 $('unlock').onsubmit=e=>{e.preventDefault();if(!CONFIG.researcherPassphrase){$('unlockStatus').textContent='Researcher setup required: set researcherPassphrase in the code before collecting data.';return;}if($('passphrase').value!==CONFIG.researcherPassphrase){$('unlockStatus').textContent='Incorrect passphrase.';return;}unlocked=true;$('passphrase').value='';$('unlockStatus').textContent='';$('unlock').hidden=true;$('exports').hidden=false;};
 function lock(){unlocked=false;$('exports').hidden=true;$('unlock').hidden=false;$('passphrase').value='';}
 
-function download(text,type,ext){if(!unlocked)return;const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download='rps-results-'+new Date().toISOString().replace(/[:.]/g,'-')+'.'+ext;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function download(text,type,ext){if(!unlocked)return;const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;const uniqname=(match?.participantId||'participant').split('@')[0].replace(/[^a-zA-Z0-9_-]/g,'_');const treatment=String(match?.treatment||'unknown').replace(/[^a-zA-Z0-9_-]/g,'_');a.download=uniqname+'-treatment-'+treatment+'-results.'+ext;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function cell(v){let s=String(v??'');if(/^[=+@\-\t\r\n]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
 function csv(){const rows=[['session_id','participant_id','first_name','last_name','year_in_school','rps_experience','treatment','total_rounds','estimated_wins_after_play','score_reported_at','actual_wins','actual_losses','actual_ties','status','started_at','completed_at','round','player_move','robot_move','result','played_at']];(match?[match]:[]).forEach(m=>{const rs=m.rounds,base=[m.id,m.participantId,m.firstName,m.lastName,m.year,m.experience,m.treatment,m.totalRounds,m.predictedWins,m.scoreReportedAt,rs.filter(r=>r.result==='win').length,rs.filter(r=>r.result==='loss').length,rs.filter(r=>r.result==='tie').length,m.completedAt?'complete':'incomplete',m.startedAt,m.completedAt];(rs.length?rs:[{}]).forEach(r=>rows.push([...base,r.round,r.player,r.robot,r.result,r.playedAt]));});return '\uFEFF'+rows.map(r=>r.map(cell).join(',')).join('\r\n');}
 
+$('redo').onclick=()=>{
+ if(!unlocked||!match)return;
+ if(!window.confirm('Redo this test? This clears the current participant’s details and rounds from this browser. Download the CSV first if you want to keep them. Files already downloaded and Google Form submissions will remain unchanged.'))return;
+ const remaining=records.filter(r=>r.id!==match.id);
+ try{
+  if(!storageOK)throw Error('Storage unavailable');
+  localStorage.setItem(KEY,JSON.stringify(remaining));
+  sessionStorage.removeItem(SESSION_KEY);sessionStorage.removeItem(DRAFT_KEY);
+ }catch(e){$('sendStatus').textContent='Could not fully reset saved progress. Please keep this page open and ask the researcher for help.';return;}
+ records=remaining;match=null;waiting=false;lock();
+ $('start').reset();$('prediction').reset();
+ ['game','finish','prediction','stepTwo'].forEach(id=>{$(id).hidden=true;});
+ $('start').hidden=false;$('predictScore').hidden=false;
+ $('finishMessage').textContent='Before you finish, estimate how many rounds you won.';
+ $('unlockStatus').textContent='';$('sendStatus').textContent='';$('storage').textContent='Test reset. Enter participant details to start again.';
+ $('human').textContent='❔';$('robot').textContent='🤖';$('message').textContent='Choose your move.';
+ document.querySelectorAll('[data-move]').forEach(b=>b.disabled=false);
+ $('email').focus();
+};
 $('csv').onclick=()=>{if(!unlocked||!match||!match.completedAt)return;download(csv(),'text/csv;charset=utf-8','csv');$('sendStatus').textContent='Downloaded your results. Please give the file to the researcher.';};
+
+const draftFields=['email','first','last','year','experience','treatment'];
+$('start').addEventListener('input',()=>{try{sessionStorage.setItem(DRAFT_KEY,JSON.stringify(Object.fromEntries(draftFields.map(id=>[id,$(id).value]))));}catch(e){}});
+function restoreProgress(){
+ try{
+  const active=JSON.parse(sessionStorage.getItem(SESSION_KEY)||'null');
+  const found=active&&records.find(r=>r.id===active.id);
+  if(found&&Array.isArray(found.rounds)&&lengths[found.treatment]===found.totalRounds&&found.rounds.length<=found.totalRounds){
+   match=found;waiting=Boolean(active.waiting)&&match.rounds.length>0;
+   $('start').hidden=true;
+   const stage=match.rounds.length===match.totalRounds?active.stage:'game';
+   $('game').hidden=stage!=='game';$('finish').hidden=stage==='game';$('stepTwo').hidden=stage!=='form';
+   if(stage==='form')$('finishMessage').textContent='Step 1 · Submit the score form in the new tab. Then continue to Step 2 below.';
+   if(stage==='game'){
+    if(match.rounds.length===match.totalRounds)waiting=true;
+    const last=match.rounds[match.rounds.length-1];
+    $('human').textContent=waiting?icons[last.player]:'❔';$('robot').textContent=waiting?icons[last.robot]:'🤖';
+    $('message').textContent=waiting?'Choices revealed.':'Choose your move.';render();
+   }
+   lock();$('storage').textContent='Your saved progress has been restored.';return;
+  }
+  const draft=JSON.parse(sessionStorage.getItem(DRAFT_KEY)||'null');
+  if(draft)draftFields.forEach(id=>{if(typeof draft[id]==='string')$(id).value=draft[id];});
+ }catch(e){$('storage').textContent='Could not restore progress. Please ask the researcher before restarting.';}
+}
+restoreProgress();
 if(!storageOK)$('storage').textContent='Local saving unavailable. Ask the researcher to export before closing.';
 </script></html>
